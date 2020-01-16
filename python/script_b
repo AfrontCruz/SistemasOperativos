@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+import os
+
+def createDB(str_ip):
+	os.system("sudo ssh alumno@" + str_ip + ''': mysql -u root --password = "root" --execute = "CREATE DATABASE Afront;" ''')
+	return
+
+def runScript(str_ip):
+	os.system("scp /home/afront/Documentos/SO/python/script alumno@" + str_ip + ":/home/alumno/Escritorio")
+	os.system("sudo ssh alumno@" + str_ip + ":sudo chmod +x /home/alumno/Escritorio/script")
+	os.system("sudo ssh alumno@" + str_ip + ":sudo ./home/alumno/Escritorio/script")
+	os.system("scp alumno@" + str_ip + ":/home/alumno/Documentos /home/afront/alumno/Documentos/")
+	return
+
+list_active = []
+
+while( i < 254 ):
+	check = os.system("ping -c3 8.9.0." + str(i))
+	if( check == 0 ):
+		list_active.append("8.9.0." + str(i))
+	i = i + 1
+
+print("Activas: ")
+for x in list_active:
+	createDB(x)
+	runScript(x)

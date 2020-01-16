@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+import os
+import subprocess
+
+def script(dir, path):
+	str_aux = ""
+	for x in dir:
+		if x == '\n':
+			os.system("sudo cp " + str_aux + " " + path )
+			str_aux = ""
+		else:
+			str_aux += x
+	return
+
+os.system("mkdir /home/alumno/Documentos/PDF /home/afront/Documentos/JPG /home/afront/Documentos/SH ")
+dir = subprocess.getoutput('''sudo find / -name "*.pdf"''' )
+
+#script( dir, "/home/alumno/Documentos/PDF" )
+#dir = subprocess.getoutput('''sudo find / -name "*.jpg"''' )
+#script( dir, "/home/alumno/Documentos/JPG" )
+#dir = subprocess.getoutput('''sudo find / -name "*.sh"''' )
+#script( dir, "/home/alumno/Documentos/SH" )

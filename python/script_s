@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import os
+
+if( os.system( "grep 'eno1' /etc/network/interfaces" ) > 0):
+	print("La red fue configurada de manera dinámica")
+else:
+	print("La configuración se encuentra en /etc/network/interfaces")
+i = 0
+list_active = []
+list_desactive = []
+while( i < 254 ):
+	check = os.system("ping -c3 192.168.43." + str(i))
+	if( check == 0 ):
+		list_active.append("192.168.43." + str(i))
+	else:
+		list_desactive.append("192.168.43." + str(i))
+	i = i + 1
+
+print("Activas: ")
+for x in list_active:
+	print(x)
+print("Sin respuesta: ")
+for x in list_desactive:
+	print(x)
+	
